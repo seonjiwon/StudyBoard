@@ -6,7 +6,7 @@
   <persistence-unit name="hello-jpa">
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
     <class>dev.jpa.studyboard.domain.studypost.StudyPost</class>
-
+    <class>dev.jpa.studyboard.domain.user.User</class>
     <properties>
       <!-- DBMS(MySQL) 관련 설정 -->
       <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
