@@ -1,9 +1,6 @@
 package dev.jpa.studyboard.domain.comment;
 
 import dev.jpa.studyboard.domain.user.User;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.EntityTransaction;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,10 +9,10 @@ import org.springframework.stereotype.Service;
 public class CommentService {
 
     private final CommentRepository commentRepository;
-    private final TransactionTemplate transactionTemplate;
+    private final JpaTransactionExecutor jpaTransactionExecutor;
 
     public int saveComment(CommentDto commentDto, int postId, User user) {
-        return transactionTemplate.execute(em -> {
+        return jpaTransactionExecutor.execute(em -> {
             Comment comment;
 
             if (commentDto.parentId() != -1) {
@@ -31,11 +28,12 @@ public class CommentService {
                                  .user(user)
                                  .build();
             }
+            commentRepository.save(em, comment);
             return comment.getId();
         });
     }
 
     public Comment getById(int id) {
-        return transactionTemplate.execute(em -> commentRepository.findById(em, id));
+        return jpaTransactionExecutor.execute(em -> commentRepository.findById(em, id));
     }
 }
