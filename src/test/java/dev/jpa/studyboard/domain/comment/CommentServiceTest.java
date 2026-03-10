@@ -18,9 +18,6 @@ class CommentServiceTest {
     @Autowired
     private CommentService commentService;
 
-    @Autowired
-    private EntityManagerFactory emf;
-
     @Test
     @DisplayName("부모 댓글 없이 댓글 저장")
     void saveComment_withoutParent() throws Exception{

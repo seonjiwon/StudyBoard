@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class TransactionTemplate {
+public class JpaTransactionExecutor {
     private final EntityManagerFactory emf;
 
     public <T> T execute(Function<EntityManager, T> action) {
