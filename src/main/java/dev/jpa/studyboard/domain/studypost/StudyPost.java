@@ -40,7 +40,7 @@ public class StudyPost {
     public String toString() {
         return "StudyPost{" +
                 "postId=" + postId +
-                ", userId=" + user.getUserId() +
+                ", userId=" + (user != null ? user.getUserId() : null) +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", category='" + category + '\'' +

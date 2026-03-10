@@ -23,11 +23,28 @@ public class StudyPostTest {
 
     StudyPostService service = new StudyPostService(manager);
 
+    private int createUser(String name) {
+        EntityTransaction tx = manager.getTransaction();
+        tx.begin();
+
+        User user = User.builder()
+                .userName(name)
+                .build();
+
+        manager.persist(user);
+
+        tx.commit();
+
+        return user.getUserId();
+    }
+
     @Test
     @DisplayName("게시글 등록")
     void 게시글등록() {
+        int userId = createUser("건희");
+
         StudyPostSaveRequest request = new StudyPostSaveRequest(
-                1,
+                userId,
                 "JPA 스터디 모집",
                 "같이 공부하실 분",
                 "BACKEND"
@@ -42,8 +59,9 @@ public class StudyPostTest {
     @Test
     @DisplayName("게시글 단건 조회")
     void 게시글단건조회() {
+        int userId = createUser("건희");
         StudyPostSaveRequest request = new StudyPostSaveRequest(
-                1,
+                userId,
                 "알고리즘 스터디 모집",
                 "백준 같이 풀 사람 구합니다",
                 "ALGORITHM"
@@ -61,15 +79,18 @@ public class StudyPostTest {
     @Test
     @DisplayName("전체 게시글 조회")
     void 전체게시글조회() {
-       service.savePost(new StudyPostSaveRequest(
-                1,
+        int userId1 = createUser("민정");
+        int userId2 = createUser("지원");
+
+        service.savePost(new StudyPostSaveRequest(
+                userId1,
                 "JPA 스터디",
                 "JPA 기본 개념 공부",
                 "BACKEND"
         ));
 
         service.savePost(new StudyPostSaveRequest(
-                2,
+                userId2,
                 "CS 스터디",
                 "운영체제 같이 공부",
                 "CS"
@@ -85,8 +106,12 @@ public class StudyPostTest {
     @Test
     @DisplayName("게시글 수정")
     void 게시글수정() {
+        User user = User.builder()
+                .userName("건희")
+                .build();
+
         service.savePost(new StudyPostSaveRequest(
-                1,
+                user.getUserId(),
                 "수정 전 제목",
                 "수정 전 내용",
                 "ETC"
@@ -110,8 +135,10 @@ public class StudyPostTest {
     @Test
     @DisplayName("게시글 삭제")
     void 게시글삭제() {
+        int userId = createUser("건희");
+
         service.savePost(new StudyPostSaveRequest(
-                1,
+                userId,
                 "삭제할 게시글",
                 "곧 삭제될 내용",
                 "ETC"
