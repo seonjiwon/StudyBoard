@@ -1,21 +1,20 @@
 package dev.jpa.studyboard.domain.user;
 
 import jakarta.persistence.EntityManager;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     public int createUser(String name) {
         User user = new User(name);
         userRepository.save(user);
-        return user.getUserId();
+        return user.getId();
     }
 
     public User findUser(int id) {

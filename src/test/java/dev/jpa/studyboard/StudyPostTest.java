@@ -54,7 +54,7 @@ public class StudyPostTest {
         List<StudyPost> posts = service.findAll();
         StudyPost savedPost = posts.get(posts.size() - 1);
 
-        StudyPost foundPost = service.findPost(savedPost.getPostId());
+        StudyPost foundPost = service.findPost(savedPost.getId());
         System.out.println("조회된 게시글 = " + foundPost);
     }
 
@@ -101,9 +101,9 @@ public class StudyPostTest {
                 "BACKEND"
         );
 
-        service.updatePost(savedPost.getPostId(), updateRequest);
+        service.updatePost(savedPost.getId(), updateRequest);
 
-        StudyPost updatedPost = service.findPost(savedPost.getPostId());
+        StudyPost updatedPost = service.findPost(savedPost.getId());
         System.out.println("수정된 게시글 = " + updatedPost);
     }
 
@@ -120,9 +120,9 @@ public class StudyPostTest {
         List<StudyPost> posts = service.findAll();
         StudyPost savedPost = posts.get(posts.size() - 1);
 
-        service.deletePost(savedPost.getPostId());
+        service.deletePost(savedPost.getId());
 
-        StudyPost deletedPost = service.findPost(savedPost.getPostId());
+        StudyPost deletedPost = service.findPost(savedPost.getId());
         System.out.println("삭제 후 조회 결과 = " + deletedPost);
     }
 }

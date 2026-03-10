@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 public class StudyPost {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int postId;
+    private int id;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -39,12 +39,12 @@ public class StudyPost {
     @Override
     public String toString() {
         return "StudyPost{" +
-                "postId=" + postId +
-                ", userId=" + user.getUserId() +
-                ", title='" + title + '\'' +
-                ", content='" + content + '\'' +
-                ", category='" + category + '\'' +
-                ", createdAt=" + postCreatedAt +
-                '}';
+            "id=" + id +
+            ", user=" + user +
+            ", title='" + title + '\'' +
+            ", content='" + content + '\'' +
+            ", category='" + category + '\'' +
+            ", postCreatedAt=" + postCreatedAt +
+            '}';
     }
 }

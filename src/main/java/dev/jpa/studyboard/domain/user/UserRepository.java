@@ -2,8 +2,9 @@ package dev.jpa.studyboard.domain.user;
 
 import jakarta.persistence.EntityManager;
 import java.util.List;
+import org.springframework.stereotype.Repository;
 
-
+@Repository
 public class UserRepository {
 
     private final EntityManager em;
